@@ -1,0 +1,16 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,300;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+   font-family: 'Roboto Condensed', sans-serif;
+}
+
+body {
+   color: rgba(255, 255, 255, 8);
+   background: rgb(51 65 85 / var(--tw-bg-opacity));
+   @apply bg-slate-700;
+}
