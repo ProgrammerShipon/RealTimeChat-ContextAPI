@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { baseUrl, getRequest } from "../utils/services";
 
-
 export const ChatContext = createContext();
 
 export const ChatContextProvider = ({ children }) => {
@@ -10,27 +9,27 @@ export const ChatContextProvider = ({ children }) => {
    const [userChats, setUserChats] = useState(null);
    const [isUserChatsLoading, setIsUserChatsLoading] = useState(false);
    const [userChatsError, setUserChatsError] = useState(null);
-
-   console.log("chat context user", user);
+   console.log(user);
 
    useEffect(() => {
-      setIsUserChatsLoading(true);
-      const getUserChats = async () => {
-         if (user?._id) {
-            const response = await getRequest(`${baseUrl}/chats/${user?._id}`);
+     setIsUserChatsLoading(true);
 
-            if (response?.error) {
-               setIsUserChatsLoading(false);
-               return setUserChatsError(response);
-            }
+     const getUserChats = async () => {
+       if (user?._id) {
+         console.log("user?._id", user?._id);
+         const response = await getRequest(`${baseUrl}/chats/${user?._id}`);
 
-            setIsUserChatsLoading(false);
-            setUserChats(response);
+         if (response?.error) {
+           setIsUserChatsLoading(false);
+           return setUserChatsError(response);
          }
-      }
+         setIsUserChatsLoading(false);
+         setUserChats(response);
+       }
+     };
 
-      getUserChats();
-   }, [])
+     getUserChats();
+   }, [user]);
 
    const chatData = {userChats, isUserChatsLoading, userChatsError}
 

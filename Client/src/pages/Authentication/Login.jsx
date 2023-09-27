@@ -1,11 +1,18 @@
 import { useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  const {loginUser,
+  const { user, loginUser,
      isLoginError,
      isLoginLoading} = useAuth()
-   const [isError, setError] = useState("")
+  const [isError, setError] = useState("");
+    const location = useLocation();
+
+    if (user?.email) {
+      return <Navigate to="/" state={{ from: location }} replace />;
+  }
+  
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -19,6 +26,7 @@ const Login = () => {
      console.log(loginData);
      loginUser(loginData);
   };
+
   return (
     <div className="h-screen flex items-center justify-center">
       <div className="p-8 w-full max-w-sm border border-slate-200 rounded-md">

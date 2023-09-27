@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
@@ -9,6 +10,11 @@ const Register = () => {
      isRegisterLoading,
    } = useAuth();
   const [isError, setError] = useState("");
+  const location = useLocation();
+
+  if (user?.email) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
 
   // Register User Handle
   const handleFormSubmit = (e) => {

@@ -4,7 +4,6 @@ import useAuth from "../hooks/useAuth";
 const Navbar = () => {
   const { user, logoutUser } = useAuth();
   
-   console.log(user)
    return (
      <>
        <div className="container">
